@@ -26,6 +26,19 @@ struct RatingView: View {
                     .onTapGesture {
                         rating = number
                     }
+                    .accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityValue("\(rating) star\(rating > 1 ? "s" : "")")
+                    .accessibilityAdjustableAction { direction in
+                        switch direction {
+                        case .increment:
+                            if rating < maximumRating {rating += 1}
+                        case .decrement:
+                            if rating > 1 {rating-=1}
+                        default:
+                            break
+                        }
+                    }
             }
         }
     }
